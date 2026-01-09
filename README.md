@@ -109,15 +109,25 @@ This repository includes `markdown-renderer.html`, a standalone HTML file that f
 
 ### Quick Start
 
-1. Open `markdown-renderer.html` in any web browser
-2. Enter a GitHub raw URL (e.g., `https://raw.githubusercontent.com/cts-partners/cts-partners-webcontent/main/content/pages/home.md`)
-3. Click "Load Content" to render the markdown
+**Option 1: Embed with URL Parameter**
+```html
+<iframe src="markdown-renderer.html?url=YOUR_RAW_GITHUB_URL" width="100%" height="600" frameborder="0"></iframe>
+```
+
+**Option 2: Embed Code Block**
+Paste the entire HTML file content into your Web3 platform's embed code block.
+
+**Option 3: Direct Link**
+Open `markdown-renderer.html` in a browser - it loads `home.md` by default.
 
 ### Features
 
-- **Standalone:** Single HTML file, no build process required
+- **Embeddable:** Single HTML file designed for iframe or code block embedding
+- **Transparent background:** 80% transparent with purple gradient border
+- **No controls:** Clean interface, content only
+- **URL parameter loading:** Pass content via `?url=` or `?md=` parameter
+- **Responsive:** Fills container width naturally
 - **Professional styling:** Dark theme with golden ratio typography
-- **Responsive:** Works on desktop and mobile
 - **Web3 ready:** Can be hosted on IPFS, Arweave, or traditional web servers
 - **Complete markdown support:** Headers, lists, tables, code blocks, images, etc.
 
@@ -126,7 +136,12 @@ This repository includes `markdown-renderer.html`, a standalone HTML file that f
 1. Navigate to any `.md` file in this repository
 2. Click the "Raw" button
 3. Copy the URL from your browser (starts with `raw.githubusercontent.com`)
-4. Paste into the renderer
+4. Use as the `?url=` parameter
+
+**Example URLs:**
+- Home: `?url=https://raw.githubusercontent.com/cts-partners/cts-partners-webcontent/main/content/pages/home.md`
+- About: `?url=https://raw.githubusercontent.com/cts-partners/cts-partners-webcontent/main/content/pages/about.md`
+- Services: `?url=https://raw.githubusercontent.com/cts-partners/cts-partners-webcontent/main/content/pages/services.md`
 
 ### Customization
 
@@ -150,7 +165,7 @@ The renderer uses CSS variables for easy customization. Edit the `:root` section
 - Text Secondary: #b8c1d9 (light gray)
 - Accent: #6c5ce7 (purple)
 
-**File Size:** ~9KB (well under Web3 embedding limits)
+**File Size:** ~6KB (well under Web3 embedding limits)
 
 ## Deployment
 
