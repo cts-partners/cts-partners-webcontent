@@ -1,4 +1,4 @@
-# About CTS Partners
+# Meet The Team
 
 ## Our Approach
 
