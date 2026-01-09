@@ -7,27 +7,14 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg-primary:#0a0e1a;--bg-secondary:#131824;--bg-tertiary:#1a2030;--text-primary:#fff;--text-secondary:#b8c1d9;--text-tertiary:#8892a6;--accent-primary:#6c5ce7;--accent-secondary:#a29bfe;--border-color:#2a3142;--code-bg:#1e2433;--font-base:18px;--font-sm:14px;--font-md:18px;--font-lg:29px;--font-xl:47px;--font-2xl:76px;--space-xs:8px;--space-sm:13px;--space-md:21px;--space-lg:34px;--space-xl:55px;--space-2xl:89px;--line-height-tight:1.2;--line-height-normal:1.618;--line-height-relaxed:1.8;--font-heading:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Consolas',monospace}
-body{font-family:var(--font-body);font-size:var(--font-md);line-height:var(--line-height-normal);color:var(--text-secondary);background:var(--bg-primary);min-height:100vh}
-.container{max-width:1200px;margin:0 auto;padding:var(--space-2xl) var(--space-lg)}
-.url-input-section{background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:12px;padding:var(--space-lg);margin-bottom:var(--space-2xl)}
-.url-input-section label{display:block;color:var(--text-primary);font-weight:500;font-size:var(--font-md);margin-bottom:var(--space-sm)}
-.url-input-wrapper{display:flex;gap:var(--space-sm)}
-.url-input{flex:1;padding:var(--space-sm) var(--space-md);background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:8px;color:var(--text-primary);font-size:var(--font-md);font-family:var(--font-mono);transition:border-color .3s ease}
-.url-input:focus{outline:none;border-color:var(--accent-primary)}
-.load-button{padding:var(--space-sm) var(--space-lg);background:var(--accent-primary);color:var(--text-primary);border:none;border-radius:8px;font-size:var(--font-md);font-weight:600;cursor:pointer;transition:all .3s ease}
-.load-button:hover{background:var(--accent-secondary);transform:translateY(-2px)}
-.load-button:active{transform:translateY(0)}
-.load-button:disabled{opacity:.5;cursor:not-allowed}
-.status-message{margin-top:var(--space-sm);padding:var(--space-sm);border-radius:6px;font-size:var(--font-sm);display:none}
-.status-message.error{background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);color:#ff6b6b;display:block}
-.status-message.success{background:rgba(81,207,102,.1);border:1px solid rgba(81,207,102,.3);color:#51cf66;display:block}
-.status-message.loading{background:rgba(108,92,231,.1);border:1px solid rgba(108,92,231,.3);color:var(--accent-secondary);display:block}
-#content{background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:12px;padding:var(--space-2xl);min-height:400px}
-#content.empty{display:flex;align-items:center;justify-content:center;color:var(--text-tertiary);font-style:italic}
+:root{--text-primary:#fff;--text-secondary:#b8c1d9;--text-tertiary:#8892a6;--accent-primary:#6c5ce7;--accent-secondary:#a29bfe;--border-gradient:linear-gradient(135deg,#6c5ce7,#a29bfe,#6c5ce7);--code-bg:rgba(30,36,51,0.8);--font-base:18px;--font-sm:14px;--font-md:18px;--font-lg:29px;--font-xl:47px;--font-2xl:76px;--space-xs:8px;--space-sm:13px;--space-md:21px;--space-lg:34px;--space-xl:55px;--space-2xl:89px;--line-height-tight:1.2;--line-height-normal:1.618;--line-height-relaxed:1.8;--font-heading:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Consolas',monospace}
+body{font-family:var(--font-body);font-size:var(--font-md);line-height:var(--line-height-normal);color:var(--text-secondary);margin:0;padding:0}
+#content{background:rgba(19,24,36,0.2);border:2px solid transparent;border-radius:16px;padding:var(--space-2xl);min-height:200px;position:relative}
+#content::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;background:var(--border-gradient);border-radius:16px;z-index:-1}
+#content.loading{opacity:0.6}
 #content h1{font-family:var(--font-heading);font-size:var(--font-2xl);font-weight:700;line-height:var(--line-height-tight);color:var(--text-primary);margin-bottom:var(--space-lg);margin-top:var(--space-2xl)}
 #content h1:first-child{margin-top:0}
-#content h2{font-family:var(--font-heading);font-size:var(--font-xl);font-weight:600;line-height:var(--line-height-tight);color:var(--text-primary);margin-top:var(--space-xl);margin-bottom:var(--space-md);padding-bottom:var(--space-sm);border-bottom:2px solid var(--border-color)}
+#content h2{font-family:var(--font-heading);font-size:var(--font-xl);font-weight:600;line-height:var(--line-height-tight);color:var(--text-primary);margin-top:var(--space-xl);margin-bottom:var(--space-md);padding-bottom:var(--space-sm);border-bottom:2px solid rgba(108,92,231,0.3)}
 #content h3{font-family:var(--font-heading);font-size:var(--font-lg);font-weight:600;line-height:var(--line-height-normal);color:var(--text-primary);margin-top:var(--space-lg);margin-bottom:var(--space-sm)}
 #content h4{font-family:var(--font-heading);font-size:var(--font-md);font-weight:600;line-height:var(--line-height-normal);color:var(--text-secondary);margin-top:var(--space-md);margin-bottom:var(--space-sm);text-transform:uppercase;letter-spacing:.05em}
 #content h5,#content h6{font-family:var(--font-heading);font-size:var(--font-md);font-weight:500;line-height:var(--line-height-normal);color:var(--text-secondary);margin-top:var(--space-md);margin-bottom:var(--space-sm)}
@@ -42,77 +29,48 @@ body{font-family:var(--font-body);font-size:var(--font-md);line-height:var(--lin
 #content strong{font-weight:600;color:var(--text-primary)}
 #content em{font-style:italic;color:var(--text-secondary)}
 #content code{font-family:var(--font-mono);font-size:.9em;background:var(--code-bg);color:var(--accent-secondary);padding:2px 6px;border-radius:4px}
-#content pre{background:var(--code-bg);border:1px solid var(--border-color);border-radius:8px;padding:var(--space-md);margin-bottom:var(--space-md);overflow-x:auto}
+#content pre{background:var(--code-bg);border:1px solid rgba(108,92,231,0.3);border-radius:8px;padding:var(--space-md);margin-bottom:var(--space-md);overflow-x:auto}
 #content pre code{background:none;padding:0;color:var(--text-secondary);font-size:var(--font-sm);line-height:1.6}
 #content blockquote{border-left:4px solid var(--accent-primary);padding-left:var(--space-md);margin:var(--space-md) 0;color:var(--text-tertiary);font-style:italic}
 #content table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0;font-size:var(--font-md)}
-#content table thead{background:var(--bg-tertiary)}
-#content table th{padding:var(--space-sm) var(--space-md);text-align:left;font-weight:600;color:var(--text-primary);border-bottom:2px solid var(--border-color)}
-#content table td{padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border-color);color:var(--text-secondary)}
-#content table tr:hover{background:var(--bg-tertiary)}
-#content hr{border:none;border-top:1px solid var(--border-color);margin:var(--space-xl) 0}
+#content table thead{background:rgba(26,32,48,0.6)}
+#content table th{padding:var(--space-sm) var(--space-md);text-align:left;font-weight:600;color:var(--text-primary);border-bottom:2px solid rgba(108,92,231,0.3)}
+#content table td{padding:var(--space-sm) var(--space-md);border-bottom:1px solid rgba(42,49,66,0.5);color:var(--text-secondary)}
+#content table tr:hover{background:rgba(26,32,48,0.4)}
+#content hr{border:none;border-top:1px solid rgba(42,49,66,0.5);margin:var(--space-xl) 0}
 #content img{max-width:100%;height:auto;border-radius:8px;margin:var(--space-md) 0}
 @media (max-width:768px){
 :root{--font-base:16px;--font-sm:13px;--font-md:16px;--font-lg:26px;--font-xl:42px;--font-2xl:54px}
-.container{padding:var(--space-lg) var(--space-md)}
 #content{padding:var(--space-lg)}
-.url-input-wrapper{flex-direction:column}
-.load-button{width:100%}
 }
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 .loading{animation:pulse 1.5s ease-in-out infinite}
 </style>
 </head>
 <body>
-<div class="container">
-<div class="url-input-section">
-<label for="markdown-url">GitHub Markdown File URL (Raw)</label>
-<div class="url-input-wrapper">
-<input type="text" id="markdown-url" class="url-input" placeholder="https://raw.githubusercontent.com/username/repo/main/file.md" value="https://raw.githubusercontent.com/cts-partners/cts-partners-webcontent/main/content/pages/home.md">
-<button id="load-button" class="load-button">Load Content</button>
-</div>
-<div id="status-message" class="status-message"></div>
-</div>
-<div id="content" class="empty">Enter a GitHub raw URL above and click "Load Content" to render markdown.</div>
-</div>
+<div id="content"></div>
 <script>
 marked.setOptions({breaks:true,gfm:true,headerIds:true,mangle:false});
-const urlInput=document.getElementById('markdown-url');
-const loadButton=document.getElementById('load-button');
 const contentDiv=document.getElementById('content');
-const statusMessage=document.getElementById('status-message');
-function showStatus(msg,type){statusMessage.textContent=msg;statusMessage.className=`status-message ${type}`}
-function hideStatus(){statusMessage.className='status-message'}
-async function loadMarkdown(){
-const url=urlInput.value.trim();
-if(!url){showStatus('Please enter a URL','error');return}
-if(!url.startsWith('http')){showStatus('Please enter a valid URL starting with http:// or https://','error');return}
-loadButton.disabled=true;
-loadButton.textContent='Loading...';
-showStatus('Fetching markdown content...','loading');
+async function loadMarkdown(url){
+if(!url)return;
 contentDiv.classList.add('loading');
 try{
 const response=await fetch(url);
-if(!response.ok)throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+if(!response.ok)throw new Error(`HTTP ${response.status}`);
 const markdownText=await response.text();
 const htmlContent=marked.parse(markdownText);
 contentDiv.innerHTML=htmlContent;
-contentDiv.classList.remove('empty','loading');
-showStatus('Content loaded successfully!','success');
-setTimeout(hideStatus,3000);
+contentDiv.classList.remove('loading');
 }catch(error){
 console.error('Error loading markdown:',error);
-showStatus(`Error: ${error.message}`,'error');
-contentDiv.innerHTML='<p style="color:var(--text-tertiary);text-align:center;">Failed to load content. Please check the URL and try again.</p>';
+contentDiv.innerHTML='<p style="color:var(--text-tertiary);text-align:center;">Failed to load content.</p>';
 contentDiv.classList.remove('loading');
-}finally{
-loadButton.disabled=false;
-loadButton.textContent='Load Content';
 }
 }
-loadButton.addEventListener('click',loadMarkdown);
-urlInput.addEventListener('keypress',(e)=>{if(e.key==='Enter')loadMarkdown()});
-window.addEventListener('DOMContentLoaded',()=>{if(urlInput.value.trim())loadMarkdown()});
+const urlParams=new URLSearchParams(window.location.search);
+const mdUrl=urlParams.get('url')||urlParams.get('md')||'https://raw.githubusercontent.com/cts-partners/cts-partners-webcontent/main/content/pages/home.md';
+loadMarkdown(mdUrl);
 </script>
 </body>
 </html>
