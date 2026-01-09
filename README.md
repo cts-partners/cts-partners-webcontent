@@ -8,6 +8,7 @@ This repository contains all content for the CTS Partners website, organized as 
 cts-partners-webcontent/
 ├── README.md                          # This file
 ├── CONTRIBUTING.md                    # Guidelines for content updates
+├── markdown-renderer.html             # Standalone markdown renderer for Web3
 ├── content/                           # Main content directory
 │   ├── pages/                         # Page-level content
 │   │   ├── about.md                   # About page content
@@ -102,12 +103,61 @@ For significant content changes:
 - Write meta descriptions for each page (stored in frontmatter)
 - Use alt text for all images
 
+## Markdown Renderer
+
+This repository includes `markdown-renderer.html`, a standalone HTML file that fetches and renders markdown content with professional styling.
+
+### Quick Start
+
+1. Open `markdown-renderer.html` in any web browser
+2. Enter a GitHub raw URL (e.g., `https://raw.githubusercontent.com/cts-partners/cts-partners-webcontent/main/content/pages/home.md`)
+3. Click "Load Content" to render the markdown
+
+### Features
+
+- **Standalone:** Single HTML file, no build process required
+- **Professional styling:** Dark theme with golden ratio typography
+- **Responsive:** Works on desktop and mobile
+- **Web3 ready:** Can be hosted on IPFS, Arweave, or traditional web servers
+- **Complete markdown support:** Headers, lists, tables, code blocks, images, etc.
+
+### Getting Raw URLs from GitHub
+
+1. Navigate to any `.md` file in this repository
+2. Click the "Raw" button
+3. Copy the URL from your browser (starts with `raw.githubusercontent.com`)
+4. Paste into the renderer
+
+### Customization
+
+The renderer uses CSS variables for easy customization. Edit the `:root` section in the HTML file to change:
+
+- Colors (background, text, accent)
+- Typography (font sizes, families, weights)
+- Spacing (margins, padding)
+
+### Design System
+
+**Typography Scale (Golden Ratio: 1.618)**
+- H1: 76px (bold)
+- H2: 47px (semi-bold)
+- H3: 29px (semi-bold)
+- Body: 18px (normal)
+
+**Color Palette**
+- Background: #0a0e1a (dark navy)
+- Text Primary: #ffffff (white)
+- Text Secondary: #b8c1d9 (light gray)
+- Accent: #6c5ce7 (purple)
+
+**File Size:** ~9KB (well under Web3 embedding limits)
+
 ## Deployment
 
 This content is designed to be consumed by a Web3-hosted website that:
 
 1. Loads markdown files from this repository
-2. Renders them with consistent styling
+2. Renders them with consistent styling using `markdown-renderer.html`
 3. Applies the appropriate layout and navigation
 
 See `docs/deployment.md` for detailed deployment instructions.
